@@ -1,14 +1,4 @@
-import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  DoCheck,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICourse } from '../../models/course';
 
 @Component({
@@ -17,7 +7,7 @@ import { ICourse } from '../../models/course';
   styleUrls: ['./courses.component.sass'],
 })
 export class CoursesComponent implements OnInit {
-  courses!: ICourse[];
+  courses: ICourse[] = [];
 
   editCourse(entity: ICourse): void {
     console.log('editCourse ==> ', entity);
