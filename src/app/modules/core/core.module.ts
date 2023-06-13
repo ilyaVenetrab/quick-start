@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { ButtonModule } from 'primeng/button';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LogoComponent],
-  imports: [CommonModule],
-  exports: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, LogoComponent, BreadcrumbsComponent],
+  imports: [CommonModule, ButtonModule],
+  exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent],
 })
 export class CoreModule {}
