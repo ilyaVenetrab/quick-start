@@ -12,6 +12,7 @@ import { BorderSetDirective } from './directives/border-set.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { CoursesService } from '../../services/courses.service';
 
 @NgModule({
   declarations: [
@@ -31,5 +32,6 @@ import { FilterPipe } from './pipes/filter.pipe';
     InputTextModule,
     FormsModule,
   ],
+  providers: [CoursesService],
 })
 export class CoursesModule {}

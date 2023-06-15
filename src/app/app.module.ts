@@ -6,13 +6,22 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './modules/core/core.module';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, CoreModule],
-  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    CoreModule,
+    ConfirmDialogModule,
+  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru' }, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -16,7 +16,7 @@
         *ngFor="let course of filterCourse | orderBy: 'creationData'"
         [course]="course"
         (edit)="editCourse($event)"
-        (delete)="deleteCourse($event)"
+        (delete)="deleteCourse(course.id)"
         [appBorderSet]="course.creationData"
       ></app-course-item>
       <div class="flex justify-content-center">

@@ -1,7 +1,10 @@
 <header class="header py-3 mb-3 shadow-6">
   <div class="px-3 md:px-7 content-wrap flex align-items-center justify-content-between">
     <app-logo></app-logo>
-    <div class="flex align-items-center gap-3">
+    <div
+      *ngIf="isLogin()"
+      class="flex align-items-center gap-3"
+    >
       <div class="flex align-items-center gap-3">
         <span class="pi pi-user"></span>
         <span>Бильбо Сумкин</span>
@@ -10,6 +13,7 @@
         label="Выход"
         icon="pi pi-sign-out"
         styleClass="p-button-md p-button-text text-color"
+        (click)="logout()"
       ></p-button>
     </div>
   </div>
