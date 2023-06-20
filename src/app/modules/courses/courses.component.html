@@ -1,35 +1,3 @@
 <div class="content-wrap px-3 md:px-7">
-  <app-breadcrumbs></app-breadcrumbs>
-  <div class="flex justify-content-between align-items-center mb-4">
-    <app-search (search)="onSearch($event)"></app-search>
-    <p-button
-      label="Добавить курс"
-      icon="pi pi-plus"
-      styleClass="p-button-lg"
-    ></p-button>
-  </div>
-  <div class="flex flex-column gap-5 mb-5">
-    <ng-container
-      *ngIf="filterCourse.length; else empty"
-    >
-      <app-course-item
-        *ngFor="let course of filterCourse | orderBy: 'creationData'"
-        [course]="course"
-        (edit)="editCourse($event)"
-        (delete)="deleteCourse(course.id)"
-        [appBorderSet]="course.creationData"
-      ></app-course-item>
-      <div class="flex justify-content-center">
-        <p-button
-          class="col-5"
-          label="Загрузить еще"
-          styleClass="p-button-lg p-button-outlined p-button-secondary w-full"
-          (click)="loadMore()"
-        ></p-button>
-      </div>
-    </ng-container>
-    <ng-template #empty>
-      <div class="text-lg text-center">Нет данных</div>
-    </ng-template>
-  </div>
+  <router-outlet></router-outlet>
 </div>
