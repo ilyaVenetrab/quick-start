@@ -10,11 +10,11 @@ export class DurationPipe implements PipeTransform {
     let result = '';
 
     if (hours > 0) {
-      result += `${hours} h `;
+      result += `${hours} ч `;
     }
 
     if (minutes > 0) {
-      result += `${minutes} min`;
+      result += `${minutes} мин`;
     }
 
     return result;
