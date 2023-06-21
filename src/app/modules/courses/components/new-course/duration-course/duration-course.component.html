@@ -1,0 +1,11 @@
+<div class="flex relative">
+  <p-inputNumber
+    [(ngModel)]="value"
+    [showButtons]="true"
+    (ngModelChange)="onChange($event)"
+    inputId="stacked"
+    class="w-full"
+    styleClass="w-full"
+  ></p-inputNumber>
+  <div class="absolute left-100 flex col-3">{{ value | duration }}</div>
+</div>

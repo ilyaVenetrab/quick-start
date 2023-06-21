@@ -13,6 +13,14 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { CoursesService } from '../../services/courses.service';
+import { CourseListComponent } from './components/course-list/course-list.component';
+import { NewCourseComponent } from './components/new-course/new-course.component';
+import { CardModule } from 'primeng/card';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { DurationCourseComponent } from './components/new-course/duration-course/duration-course.component';
+import { AuthorsComponent } from './components/new-course/authors/authors.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -23,14 +31,22 @@ import { CoursesService } from '../../services/courses.service';
     DurationPipe,
     OrderByPipe,
     FilterPipe,
+    CourseListComponent,
+    NewCourseComponent,
+    DurationCourseComponent,
+    AuthorsComponent,
   ],
   imports: [
-    CoursesRoutingModule,
     CommonModule,
     CoreModule,
     ButtonModule,
     InputTextModule,
     FormsModule,
+    CoursesRoutingModule,
+    CardModule,
+    InputTextareaModule,
+    CalendarModule,
+    InputNumberModule,
   ],
   providers: [CoursesService],
 })

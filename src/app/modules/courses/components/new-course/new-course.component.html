@@ -1,0 +1,52 @@
+<p-card>
+  <h1 class="mb-5">Новый курс</h1>
+
+  <div class="flex flex-column gap-4 col-6">
+    <input
+      [(ngModel)]="name"
+      type="text"
+      pInputText
+      placeholder="Наименование*"
+      class="flex-grow-1"
+    />
+
+    <textarea
+      [(ngModel)]="description"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      placeholder="Описание*"
+      class="flex-grow-1"
+    ></textarea>
+
+    <app-duration-course
+      [value]="duration"
+      (changeValue)="durationChange($event)"
+      class="flex-grow-1"
+    >
+    </app-duration-course>
+
+    <p-calendar
+      [(ngModel)]="date"
+      [showIcon]="true"
+      placeholder="Дата*"
+      class="flex-grow-1"
+      styleClass="w-full"
+    ></p-calendar>
+
+    <app-authors></app-authors>
+
+    <div class="flex gap-3">
+      <p-button
+        label="Отмена"
+        styleClass="p-button- p-button-text"
+        (click)="onCancel()"
+      ></p-button>
+      <p-button
+        label="Сохранить"
+        styleClass="p-button"
+        (click)="onSave()"
+      ></p-button>
+    </div>
+  </div>
+</p-card>
