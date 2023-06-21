@@ -1,5 +1,5 @@
-export interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string;
+export interface IUserLogin {
+  email: string;
+  password: string;
+  token: number;
 }
