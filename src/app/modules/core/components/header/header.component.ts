@@ -13,7 +13,7 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  isLogin(): boolean {
+  get isLogin(): boolean {
     return this.authService.isAuthenticated();
   }
 }
