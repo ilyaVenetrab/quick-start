@@ -1,10 +1,5 @@
-<div class="mb-4">
-  <div class="border-round-lg bg-white flex align-items-center gap-3 p-3 text-lg">
-    <p-button
-      styleClass="p-button-sm p-button-text text-color p-1"
-    >
-      <span class="pi pi-home text-xl"></span>
-    </p-button>
-    <span>Курсы</span>
-  </div>
-</div>
+<p-breadcrumb
+  styleClass="mb-4"
+  [model]="items"
+  [home]="home"
+></p-breadcrumb>

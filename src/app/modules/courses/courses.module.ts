@@ -21,6 +21,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DurationCourseComponent } from './components/new-course/duration-course/duration-course.component';
 import { AuthorsComponent } from './components/new-course/authors/authors.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UpdateCourseResolver } from './components/new-course/update-course.resolver';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     InputNumberModule,
   ],
-  providers: [CoursesService],
+  providers: [CoursesService, UpdateCourseResolver],
 })
 export class CoursesModule {}

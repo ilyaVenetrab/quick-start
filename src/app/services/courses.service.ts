@@ -57,9 +57,20 @@ export class CoursesService {
 
   createCourse() {}
 
-  getItemById() {}
+  getItemById(id: number): ICourse | null {
+    const entity = this.list.filter((i) => i.id === id);
+    return entity.length ? entity[0] : null;
+  }
 
-  updateItem() {}
+  saveItem(entity: ICourse) {
+    const indexOf = this.list.findIndex((q) => q.id === entity.id);
+
+    if (indexOf > -1) {
+      this.list[indexOf] = entity;
+    } else {
+      this.list.push(entity);
+    }
+  }
 
   removeItem(id: number): ICourse[] {
     this.list = this.list.filter((i) => i.id !== id);
