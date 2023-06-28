@@ -3,6 +3,7 @@ import { ICourse } from '../../../../models/course';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { CoursesService } from '../../../../services/courses.service';
 import { ConfirmationService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -18,10 +19,11 @@ export class CourseListComponent implements OnInit {
     private filterPipe: FilterPipe,
     private coursesService: CoursesService,
     private confirmationService: ConfirmationService,
+    private router: Router,
   ) {}
 
   editCourse(entity: ICourse): void {
-    console.log('editCourse ==> ', entity);
+    this.router.navigateByUrl('/courses/' + entity.id);
   }
 
   deleteCourse(id: number): void {
@@ -53,5 +55,9 @@ export class CourseListComponent implements OnInit {
 
   onSearch(str: string): void {
     this.filterCourse = this.filterPipe.transform(this.courses, str);
+  }
+
+  createNew(): void {
+    this.router.navigate(['/courses/new']);
   }
 }

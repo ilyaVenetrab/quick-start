@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { filter, map } from 'rxjs';
+import { ICourse } from '../../../../models/course';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { CoursesService } from '../../../../services/courses.service';
 
 @Component({
   selector: 'app-new-course',
@@ -7,21 +11,40 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewCourseComponent {
-  name = '';
+  course: ICourse = {
+    id: 0,
+    title: '',
+    description: '',
+    creationData: new Date(),
+    duration: 0,
+    topRated: false,
+  };
 
-  description = '';
-
-  date = '';
-
-  duration = 0;
-
-  durationChange(value: number) {
-    this.duration = value;
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private coursesService: CoursesService,
+    private router: Router,
+  ) {
+    this.activatedRoute.data
+      .pipe(
+        map(({ course }: { course: ICourse } | Data) => course),
+        filter((course) => course),
+      )
+      .subscribe((course) => {
+        this.course = course;
+      });
   }
 
-  onCancel(): void {}
+  durationChange(value: number) {
+    this.course.duration = value;
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/courses');
+  }
 
   onSave(): void {
-    console.log(this.name, this.description, this.date, this.duration);
+    this.coursesService.saveItem(this.course);
+    this.router.navigateByUrl('/courses');
   }
 }
