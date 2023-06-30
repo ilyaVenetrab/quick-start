@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ICourse } from '../../../../models/course';
-import { FilterPipe } from '../../pipes/filter.pipe';
 import { CoursesService } from '../../../../services/courses.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 export class CourseListComponent implements OnInit {
   courses: ICourse[] = [];
 
-  filterCourse: ICourse[] = this.courses;
+  loadMoreDisabled = false;
+
+  filterSearch = '';
 
   constructor(
-    private filterPipe: FilterPipe,
     private coursesService: CoursesService,
     private confirmationService: ConfirmationService,
     private router: Router,
@@ -34,8 +35,9 @@ export class CourseListComponent implements OnInit {
       acceptIcon: 'pi',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
-        this.courses = this.coursesService.removeItem(id);
-        this.filterCourse = this.courses;
+        this.coursesService.removeItem(id).subscribe(() => {
+          this.loadData();
+        });
       },
       rejectLabel: 'Отмена',
       rejectIcon: 'pi',
@@ -45,16 +47,27 @@ export class CourseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.courses = this.coursesService.getList();
-    this.filterCourse = this.courses;
+    this.loadData();
+  }
+
+  loadData(count = 10): void {
+    this.coursesService
+      .getList(count, this.filterSearch)
+      .pipe(take(1))
+      .subscribe((course) => {
+        this.courses = course;
+
+        this.loadMoreDisabled = this.courses.length >= count;
+      });
   }
 
   loadMore(): void {
-    console.log('loadMore');
+    this.loadData(this.courses.length + 10);
   }
 
   onSearch(str: string): void {
-    this.filterCourse = this.filterPipe.transform(this.courses, str);
+    this.filterSearch = str;
+    this.loadData();
   }
 
   createNew(): void {

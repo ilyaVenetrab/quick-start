@@ -12,13 +12,22 @@ export class LoginComponent {
 
   password = '';
 
+  error = false;
+
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   onLogin(): void {
-    this.authService.login({
-      email: this.email,
-      password: this.password,
-      token: Math.floor(Math.random() * (1000000 - 1) + 1),
-    });
+    this.error = false;
+
+    this.authService
+      .login({
+        email: this.email,
+        password: this.password,
+      })
+      .subscribe({
+        next: (users) => {
+          this.error = !users;
+        },
+      });
   }
 }

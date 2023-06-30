@@ -9,16 +9,16 @@
 </div>
 <div class="flex flex-column gap-5 mb-5">
   <ng-container
-    *ngIf="filterCourse.length; else empty"
+    *ngIf="courses.length; else empty"
   >
     <app-course-item
-      *ngFor="let course of filterCourse | orderBy: 'creationData'"
+      *ngFor="let course of courses | orderBy: 'creationData'"
       [course]="course"
       (edit)="editCourse($event)"
       (delete)="deleteCourse(course.id)"
       [appBorderSet]="course.creationData"
     ></app-course-item>
-    <div class="flex justify-content-center">
+    <div class="flex justify-content-center" *ngIf="loadMoreDisabled">
       <p-button
         class="col-5"
         label="Загрузить еще"

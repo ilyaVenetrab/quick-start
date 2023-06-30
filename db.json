@@ -1,0 +1,192 @@
+{
+  "allCourses": [
+    {
+      "id": 2,
+      "title": "Мagna Excepteur aute Deserunt",
+      "creationData": "2023-02-21T21:00:00.000Z",
+      "duration": 223,
+      "description": "Sunt culpa officia minim commodo eiusmod irure sunt nostrud. Mollit aliquip id occaecat officia proident anim dolor officia qui voluptate consectetur laborum. Duis incididunt culpa aliqua mollit do fugiat ea dolor mollit irure Lorem tempor.",
+      "topRated": false
+    },
+    {
+      "id": 3,
+      "title": "Reprehenderit eiusmod nostrud amet",
+      "creationData": "Mon Jul 03 2023 00:00:00 GMT+0300",
+      "duration": 82,
+      "description": "Est consequat deserunt officia fugiat culpa in aliquip consectetur. Est nostrud occaecat cillum elit officia officia ea magna et minim officia commodo sunt. Deserunt duis minim magna nostrud enim enim commodo sit elit nostrud cillum aliquip est qui.",
+      "topRated": false
+    },
+    {
+      "id": 4,
+      "title": "Sit voluptate eiusmod ea",
+      "creationData": "Sat Jun 10 2023 00:00:00 GMT+0300",
+      "duration": 35,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est fugit laudantium nobis quisquam recusandae?",
+      "topRated": true
+    },
+    {
+      "id": 5,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Est minim ea aute sunt laborum minim eu excepteur. Culpa sint exercitation mollit enim ad culpa aliquip laborum cillum. Dolor officia culpa labore ex eiusmod ut est ea voluptate ea nostrud.",
+      "topRated": false
+    },
+    {
+      "id": 6,
+      "title": "Lorem ipsum dolor sit.",
+      "creationData": "Mon Jul 01 2023 00:00:00 GMT+0300",
+      "duration": 82,
+      "description": "Est consequat deserunt officia fugiat culpa in aliquip consectetur. Est nostrud occaecat cillum elit officia officia ea magna et minim officia commodo sunt. Deserunt duis minim magna nostrud enim enim commodo sit elit nostrud cillum aliquip est qui.",
+      "topRated": false
+    },
+    {
+      "id": 7,
+      "title": "Lorem ipsum dolor sit.",
+      "creationData": "Sat Jun 15 2023 00:00:00 GMT+0300",
+      "duration": 35,
+      "description": "Commodo id sunt sunt adipisicing et aliquip voluptate laborum consectetur. Occaecat nisi sint exercitation ullamco adipisicing irure est in consectetur aute voluptate. Ea pariatur dolor anim ea reprehenderit ut non occaecat magna adipisicing exercitation nisi consequat.",
+      "topRated": true
+    },
+    {
+      "id": 9,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-12-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Est minim ea aute sunt laborum minim eu excepteur. Culpa sint exercitation mollit enim ad culpa aliquip laborum cillum. Dolor officia culpa labore ex eiusmod ut est ea voluptate ea nostrud.",
+      "topRated": false
+    },
+    {
+      "id": 10,
+      "title": "Lorem ipsum dolor sit amet.",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Accusamus animi distinctio dolorum est explicabo libero nemo perspiciatis voluptas.",
+      "topRated": false
+    },
+    {
+      "id": 11,
+      "title": "Lorem ipsum dolor sit amet.",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores.",
+      "topRated": false
+    },
+    {
+      "id": 12,
+      "title": "Lorem ipsum dolor sit amet.",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est fugit laudantium nobis quisquam recusandae?",
+      "topRated": false
+    },
+    {
+      "id": 2,
+      "title": "Мagna Excepteur aute Deserunt",
+      "creationData": "2023-02-21T21:00:00.000Z",
+      "duration": 223,
+      "description": "Sunt culpa officia minim commodo eiusmod irure sunt nostrud. Mollit aliquip id occaecat officia proident anim dolor officia qui voluptate consectetur laborum. Duis incididunt culpa aliqua mollit do fugiat ea dolor mollit irure Lorem tempor.",
+      "topRated": false
+    },
+    {
+      "id": 3,
+      "title": "Reprehenderit eiusmod nostrud amet",
+      "creationData": "Mon Jul 03 2023 00:00:00 GMT+0300",
+      "duration": 82,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores.",
+      "topRated": false
+    },
+    {
+      "id": 4,
+      "title": "Sit voluptate eiusmod ea",
+      "creationData": "Sat Jun 15 2023 00:00:00 GMT+0300",
+      "duration": 35,
+      "description": "Commodo id sunt sunt adipisicing et aliquip voluptate laborum consectetur. Occaecat nisi sint exercitation ullamco adipisicing irure est in consectetur aute voluptate. Ea pariatur dolor anim ea reprehenderit ut non occaecat magna adipisicing exercitation nisi consequat.",
+      "topRated": true
+    },
+    {
+      "id": 56,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2022-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Accusamus animi distinctio dolorum est explicabo libero nemo perspiciatis voluptas.",
+      "topRated": false
+    },
+    {
+      "id": 12,
+      "title": "Lorem ipsum dolor sit.",
+      "creationData": "2023-02-21T21:00:00.000Z",
+      "duration": 223,
+      "description": "Sunt culpa officia minim commodo eiusmod irure sunt nostrud. Mollit aliquip id occaecat officia proident anim dolor officia qui voluptate consectetur laborum. Duis incididunt culpa aliqua mollit do fugiat ea dolor mollit irure Lorem tempor.",
+      "topRated": false
+    },
+    {
+      "id": 61,
+      "title": "Reprehenderit eiusmod nostrud amet",
+      "creationData": "Mon Jul 03 2023 00:00:00 GMT+0300",
+      "duration": 82,
+      "description": "Est consequat deserunt officia fugiat culpa in aliquip consectetur. Est nostrud occaecat cillum elit officia officia ea magna et minim officia commodo sunt. Deserunt duis minim magna nostrud enim enim commodo sit elit nostrud cillum aliquip est qui.",
+      "topRated": false
+    },
+    {
+      "id": 74,
+      "title": "Sit voluptate eiusmod ea",
+      "creationData": "Sat Jun 10 2023 00:00:00 GMT+0300",
+      "duration": 135,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores.",
+      "topRated": true
+    },
+    {
+      "id": 83,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 23,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+      "topRated": false
+    },
+    {
+      "id": 91,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-05-19T21:00:00.000Z",
+      "duration": 223,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi distinctio dolorum est explicabo libero nemo perspiciatis voluptas.",
+      "topRated": false
+    },
+    {
+      "id": 102,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-06-14T21:00:00.000Z",
+      "duration": 50,
+      "description": "Est minim ea aute sunt laborum minim eu excepteur. Culpa sint exercitation mollit enim ad culpa aliquip laborum cillum. Dolor officia culpa labore ex eiusmod ut est ea voluptate ea nostrud.",
+      "topRated": false
+    },
+    {
+      "id": 112,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 223,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores.",
+      "topRated": false
+    },
+    {
+      "id": 121,
+      "title": "Duis mollit reprehenderit ad11",
+      "creationData": "2023-06-11T21:00:00.000Z",
+      "duration": 45,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi distinctio dolorum est explicabo libero nemo perspiciatis voluptas.",
+      "topRated": false
+    }
+  ],
+  "users": [
+    {
+      "email": "test@test.com",
+      "password": 1234,
+      "token": "442738TC23"
+    },
+    {
+      "email": "www@ddd.com",
+      "password": "qwer",
+      "token": "38dd5333LEK21"
+    }
+  ]
+}

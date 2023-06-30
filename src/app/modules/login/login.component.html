@@ -20,8 +20,10 @@
           id="password"
           [(ngModel)]="password"
           placeholder="Ваш пароль"
+          type="password"
         />
       </div>
+      <div class="mx-1 text-red-500" *ngIf="error">Некорректные данные</div>
       <div class="flex justify-content-between align-items-center">
         <span>Забыли пароль?</span>
         <p-button
