@@ -1,5 +1,8 @@
-export interface IUserLogin {
+export interface IUser {
   email: string;
   password: string;
-  token: number;
+}
+
+export interface IUserInfo extends IUser {
+  token: string;
 }
