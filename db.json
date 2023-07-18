@@ -181,12 +181,14 @@
     {
       "email": "test@test.com",
       "password": 1234,
-      "token": "442738TC23"
+      "token": "442738TC23",
+      "fullName": "Бильбо Бэггинс"
     },
     {
       "email": "www@ddd.com",
       "password": "qwer",
-      "token": "38dd5333LEK21"
+      "token": "38dd5333LEK21",
+      "fullName": "Фродо Бэггинс"
     }
   ]
 }

@@ -9,6 +9,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CardModule } from 'primeng/card';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,16 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     LogoComponent,
     BreadcrumbsComponent,
     NotFoundComponent,
+    LoaderComponent,
   ],
-  imports: [CommonModule, ButtonModule, CardModule, RouterModule, BreadcrumbModule],
-  exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    CardModule,
+    RouterModule,
+    BreadcrumbModule,
+    ProgressSpinnerModule,
+  ],
+  exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent, LoaderComponent],
 })
 export class CoreModule {}
