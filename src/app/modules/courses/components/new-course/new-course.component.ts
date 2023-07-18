@@ -36,7 +36,10 @@ export class NewCourseComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((course) => {
-        this.course = course;
+        this.course = {
+          ...course,
+          creationData: new Date(course.creationData),
+        };
       });
   }
 
@@ -49,8 +52,15 @@ export class NewCourseComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
-    this.coursesService.saveItem(this.course);
-    this.router.navigateByUrl('/courses');
+    if (this.course.id === 0) {
+      this.coursesService.saveItem(this.course).subscribe(() => {
+        this.router.navigateByUrl('/courses');
+      });
+    } else {
+      this.coursesService.updateItem(this.course).subscribe(() => {
+        this.router.navigateByUrl('/courses');
+      });
+    }
   }
 
   ngOnDestroy(): void {

@@ -9,7 +9,7 @@ export class UpdateCourseResolver implements Resolve<ICourse | null> {
   constructor(private readonly router: Router, private readonly coursesService: CoursesService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<ICourse | null> {
-    return of(this.coursesService.getItemById(Number(route.paramMap.get('courseId')))).pipe(
+    return this.coursesService.getItemById(Number(route.paramMap.get('courseId'))).pipe(
       map((course: ICourse | null) => {
         if (!course) {
           this.router.navigate(['/courses']);

@@ -12,7 +12,7 @@ export class BorderSetDirective implements AfterViewInit {
     const [child] = this.elementRef.nativeElement.children;
     const date = new Date();
     const dateGetTime = date.getTime();
-    const creationDateGetTime = this.creationDate.getTime();
+    const creationDateGetTime = new Date(this.creationDate).getTime();
 
     if (
       creationDateGetTime < dateGetTime &&
