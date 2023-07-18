@@ -1,9 +1,12 @@
 <p-card>
-  <h1 class="mb-5">Новый курс</h1>
+  <h1 class="mb-5" *ngIf="course.id === 0; else updateTitle;">Новый курс</h1>
+  <ng-template #updateTitle>
+    <h1 class="mb-5">Редавтирование курса</h1>
+  </ng-template>
 
   <div class="flex flex-column gap-4 col-6">
     <input
-      [(ngModel)]="name"
+      [(ngModel)]="course.title"
       type="text"
       pInputText
       placeholder="Наименование*"
@@ -11,7 +14,7 @@
     />
 
     <textarea
-      [(ngModel)]="description"
+      [(ngModel)]="course.description"
       rows="5"
       cols="30"
       pInputTextarea
@@ -20,14 +23,14 @@
     ></textarea>
 
     <app-duration-course
-      [value]="duration"
+      [value]="course.duration"
       (changeValue)="durationChange($event)"
       class="flex-grow-1"
     >
     </app-duration-course>
 
     <p-calendar
-      [(ngModel)]="date"
+      [(ngModel)]="course.creationData"
       [showIcon]="true"
       placeholder="Дата*"
       class="flex-grow-1"

@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { filter, map, takeUntil } from 'rxjs';
+import { ICourse } from '../../../../models/course';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { CoursesService } from '../../../../services/courses.service';
 
 @Component({
   selector: 'app-new-course',
@@ -6,22 +10,50 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./new-course.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewCourseComponent {
-  name = '';
+export class NewCourseComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new EventEmitter<void>();
 
-  description = '';
+  course: ICourse = {
+    id: 0,
+    title: '',
+    description: '',
+    creationData: new Date(),
+    duration: 0,
+    topRated: false,
+  };
 
-  date = '';
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private coursesService: CoursesService,
+    private router: Router,
+  ) {}
 
-  duration = 0;
-
-  durationChange(value: number) {
-    this.duration = value;
+  ngOnInit(): void {
+    this.activatedRoute.data
+      .pipe(
+        map(({ course }: { course: ICourse } | Data) => course),
+        filter((course) => course),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((course) => {
+        this.course = course;
+      });
   }
 
-  onCancel(): void {}
+  durationChange(value: number) {
+    this.course.duration = value;
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/courses');
+  }
 
   onSave(): void {
-    console.log(this.name, this.description, this.date, this.duration);
+    this.coursesService.saveItem(this.course);
+    this.router.navigateByUrl('/courses');
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.emit();
   }
 }
