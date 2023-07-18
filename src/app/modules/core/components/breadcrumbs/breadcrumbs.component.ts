@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from '../../../../services/breadcrumb.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -8,7 +9,7 @@ import { BreadcrumbService } from '../../../../services/breadcrumb.service';
   styleUrls: ['./breadcrumbs.component.sass'],
 })
 export class BreadcrumbsComponent {
-  items: MenuItem[] = [];
+  items$: Observable<MenuItem[]> = this.breadcrumbService.breadcrumbs$;
 
   home: MenuItem = {
     icon: 'pi pi-home',
@@ -17,9 +18,5 @@ export class BreadcrumbsComponent {
     iconStyle: { 'margin-right': '.5rem' },
   };
 
-  constructor(private readonly breadcrumbService: BreadcrumbService) {
-    this.breadcrumbService.breadcrumbs$.subscribe((resp) => {
-      this.items = resp;
-    });
-  }
+  constructor(private readonly breadcrumbService: BreadcrumbService) {}
 }

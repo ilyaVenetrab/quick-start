@@ -1,19 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter } from 'rxjs';
+import { EventEmitter, Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, filter, takeUntil } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { ActivatedRouteSnapshot, Data, NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BreadcrumbService {
+export class BreadcrumbService implements OnDestroy {
   private readonly _breadcrumbs$ = new BehaviorSubject<MenuItem[]>([]);
+
+  private readonly destroy$ = new EventEmitter<void>();
 
   readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
   constructor(private router: Router) {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$),
+      )
       .subscribe((_event) => {
         const root = this.router.routerState.snapshot.root;
         const breadcrumbs: MenuItem[] = [];
@@ -47,5 +52,9 @@ export class BreadcrumbService {
 
   private getLabel(data: Data): string {
     return typeof data['breadcrumb'] === 'function' ? data['breadcrumb'](data) : data['breadcrumb'];
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.emit();
   }
 }

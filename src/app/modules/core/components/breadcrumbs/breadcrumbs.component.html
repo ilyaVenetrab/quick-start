@@ -1,5 +1,5 @@
 <p-breadcrumb
   styleClass="mb-4"
-  [model]="items"
+  [model]="(items$ | async) || []"
   [home]="home"
 ></p-breadcrumb>
