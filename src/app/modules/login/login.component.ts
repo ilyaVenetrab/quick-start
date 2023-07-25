@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,26 +8,18 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent {
-  email = '';
+  constructor(private authService: AuthService) {}
 
-  password = '';
-
-  error = false;
-
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
-
-  onLogin(): void {
-    this.error = false;
+  onLogin(form: NgForm): void {
+    const { email, password } = form.value;
 
     this.authService
       .login({
-        email: this.email,
-        password: this.password,
+        email,
+        password,
       })
       .subscribe({
-        next: (users) => {
-          this.error = !users;
-        },
+        next: (users) => console.log(users),
       });
   }
 }

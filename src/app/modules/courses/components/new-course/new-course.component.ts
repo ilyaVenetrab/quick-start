@@ -3,29 +3,55 @@ import { filter, map, takeUntil } from 'rxjs';
 import { ICourse } from '../../../../models/course';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { CoursesService } from '../../../../services/courses.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { IAuthor } from '../../../../models/authors';
+import { HttpClientModule } from '@angular/common/http';
+
+interface ICourseForm {
+  id: FormControl<number | null>;
+  title: FormControl<string | null>;
+  description: FormControl<string | null>;
+  creationData: FormControl<Data | null>;
+  duration: FormControl<number | null>;
+  authors: FormControl<IAuthor[] | null>;
+  topRated: FormControl<boolean | null>;
+}
 
 @Component({
   selector: 'app-new-course',
   templateUrl: './new-course.component.html',
   styleUrls: ['./new-course.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [HttpClientModule],
 })
 export class NewCourseComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new EventEmitter<void>();
 
-  course: ICourse = {
-    id: 0,
-    title: '',
-    description: '',
-    creationData: new Date(),
-    duration: 0,
-    topRated: false,
-  };
+  form = this.fb.group<ICourseForm>({
+    id: new FormControl(null),
+    title: new FormControl(null, {
+      validators: [Validators.required, Validators.maxLength(50)],
+    }),
+    description: new FormControl(null, {
+      validators: [Validators.required, Validators.maxLength(500)],
+    }),
+    creationData: new FormControl(new Date(), {
+      validators: [Validators.required],
+    }),
+    duration: new FormControl(null, {
+      validators: [Validators.required, Validators.pattern('^[0-9]*$')],
+    }),
+    authors: new FormControl(null, {
+      validators: [Validators.required],
+    }),
+    topRated: new FormControl(false),
+  });
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
     private router: Router,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
@@ -36,15 +62,11 @@ export class NewCourseComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((course) => {
-        this.course = {
+        this.form.patchValue({
           ...course,
           creationData: new Date(course.creationData),
-        };
+        });
       });
-  }
-
-  durationChange(value: number) {
-    this.course.duration = value;
   }
 
   onCancel(): void {
@@ -52,14 +74,17 @@ export class NewCourseComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
-    if (this.course.id === 0) {
-      this.coursesService.saveItem(this.course).subscribe(() => {
-        this.router.navigateByUrl('/courses');
-      });
-    } else {
-      this.coursesService.updateItem(this.course).subscribe(() => {
-        this.router.navigateByUrl('/courses');
-      });
+    console.log('this.form.value ==> ', this.form.value);
+    if (this.form.valid) {
+      if (this.form.value.id) {
+        this.coursesService.updateItem(this.form.value as any).subscribe(() => {
+          this.router.navigateByUrl('/courses');
+        });
+      } else {
+        this.coursesService.saveItem(this.form.value as any).subscribe(() => {
+          this.router.navigateByUrl('/courses');
+        });
+      }
     }
   }
 

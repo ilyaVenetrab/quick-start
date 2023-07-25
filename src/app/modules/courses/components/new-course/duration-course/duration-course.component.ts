@@ -1,19 +1,49 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-duration-course',
   templateUrl: './duration-course.component.html',
   styleUrls: ['./duration-course.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: DurationCourseComponent,
+    },
+  ],
 })
-export class DurationCourseComponent {
-  @Input()
-  value = 0;
+export class DurationCourseComponent implements ControlValueAccessor {
+  quantity = 0;
 
-  @Output()
-  changeValue: EventEmitter<number> = new EventEmitter<number>();
+  touched = false;
 
-  onChange(value: number): void {
-    this.changeValue.emit(value);
+  onChange = (_quantity: number) => {};
+
+  onTouched = () => {};
+
+  changeQuantity(event: number) {
+    this.markAsTouched();
+    this.onChange(event);
+  }
+
+  writeValue(quantity: number): void {
+    this.quantity = quantity;
+  }
+
+  registerOnChange(onChange: any): void {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouched: any): void {
+    this.onTouched = onTouched;
+  }
+
+  markAsTouched(): void {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
   }
 }
