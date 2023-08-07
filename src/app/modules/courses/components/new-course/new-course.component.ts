@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { filter, map, takeUntil } from 'rxjs';
+import { filter, map, take, takeUntil } from 'rxjs';
 import { ICourse } from '../../../../models/course';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { CoursesService } from '../../../../services/courses.service';
@@ -28,23 +28,23 @@ export class NewCourseComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new EventEmitter<void>();
 
   form = this.fb.group<ICourseForm>({
-    id: new FormControl(null),
-    title: new FormControl(null, {
+    id: this.fb.control(null),
+    title: this.fb.control(null, {
       validators: [Validators.required, Validators.maxLength(50)],
     }),
-    description: new FormControl(null, {
+    description: this.fb.control(null, {
       validators: [Validators.required, Validators.maxLength(500)],
     }),
-    creationData: new FormControl(new Date(), {
+    creationData: this.fb.control(new Date(), {
       validators: [Validators.required],
     }),
-    duration: new FormControl(null, {
+    duration: this.fb.control(null, {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    authors: new FormControl(null, {
+    authors: this.fb.control(null, {
       validators: [Validators.required],
     }),
-    topRated: new FormControl(false),
+    topRated: this.fb.control(false),
   });
 
   constructor(
@@ -77,13 +77,19 @@ export class NewCourseComponent implements OnInit, OnDestroy {
     console.log('this.form.value ==> ', this.form.value);
     if (this.form.valid) {
       if (this.form.value.id) {
-        this.coursesService.updateItem(this.form.value as any).subscribe(() => {
-          this.router.navigateByUrl('/courses');
-        });
+        this.coursesService
+          .updateItem(this.form.value as any)
+          .pipe(take(1))
+          .subscribe(() => {
+            this.router.navigateByUrl('/courses');
+          });
       } else {
-        this.coursesService.saveItem(this.form.value as any).subscribe(() => {
-          this.router.navigateByUrl('/courses');
-        });
+        this.coursesService
+          .saveItem(this.form.value as any)
+          .pipe(take(1))
+          .subscribe(() => {
+            this.router.navigateByUrl('/courses');
+          });
       }
     }
   }

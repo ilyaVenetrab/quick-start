@@ -9,5 +9,6 @@
     [(ngModel)]="quantity"
     [showButtons]="true"
   ></p-inputNumber>
+  <div class="absolute left-100 top-0 flex col-3">{{ quantity | duration }}</div>
   <label for="duration">Продожительность*</label>
 </div>
