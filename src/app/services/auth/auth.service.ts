@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { IUser, IUserInfo } from '../../models/user';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  @Output() getLogin: EventEmitter<IUserInfo | null> = new EventEmitter();
+  getLogin: EventEmitter<IUserInfo | null> = new EventEmitter();
 
   static readonly STORAGE_KEY = 'user';
 

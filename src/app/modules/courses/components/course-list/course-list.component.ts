@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { ICourse } from '../../../../models/course';
 import { CoursesService } from '../../../../services/courses.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { debounceTime, Subject, take } from 'rxjs';
+import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,9 @@ import { filter } from 'rxjs/operators';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.sass'],
 })
-export class CourseListComponent implements OnInit {
+export class CourseListComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new EventEmitter<void>();
+
   courses: ICourse[] = [];
 
   loadMoreDisabled = false;
@@ -27,6 +29,7 @@ export class CourseListComponent implements OnInit {
       .pipe(
         filter((str) => !str || str.length > 3),
         debounceTime(250),
+        takeUntil(this.destroy$),
       )
       .subscribe((search) => {
         this.loadData(10, search);
@@ -81,5 +84,9 @@ export class CourseListComponent implements OnInit {
 
   createNew(): void {
     this.router.navigate(['/courses/new']);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.emit();
   }
 }
