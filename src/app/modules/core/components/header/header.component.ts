@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
+import { Observable } from 'rxjs';
+import { IUserInfo } from '../../../../models/user';
 
 @Component({
   selector: 'app-header',
@@ -7,13 +9,11 @@ import { AuthService } from '../../../../services/auth/auth.service';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+  user$: Observable<IUserInfo | null> = this.authService.getLogin;
+
   constructor(private authService: AuthService) {}
 
   logout(): void {
     this.authService.logout();
-  }
-
-  get isLogin(): boolean {
-    return this.authService.isAuthenticated();
   }
 }

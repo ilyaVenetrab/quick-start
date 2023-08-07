@@ -1,11 +1,17 @@
 <div class="flex gap-3">
   <div class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input type="text" pInputText [(ngModel)]="value" class="h-full" />
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="value"
+      (keyup)="onSearch()"
+      class="h-full"
+    />
   </div>
-  <p-button
+  <!--<p-button
     label="Найти"
     styleClass="p-button-lg"
     (click)="onSearch()"
-  ></p-button>
+  ></p-button>-->
 </div>

@@ -5,4 +5,5 @@ export interface IUser {
 
 export interface IUserInfo extends IUser {
   token: string;
+  fullName: string;
 }
