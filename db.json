@@ -11,17 +11,30 @@
     {
       "id": 3,
       "title": "Reprehenderit eiusmod nostrud amet",
-      "creationData": "Mon Jul 03 2023 00:00:00 GMT+0300",
-      "duration": 82,
       "description": "Est consequat deserunt officia fugiat culpa in aliquip consectetur. Est nostrud occaecat cillum elit officia officia ea magna et minim officia commodo sunt. Deserunt duis minim magna nostrud enim enim commodo sit elit nostrud cillum aliquip est qui.",
+      "creationData": "2023-07-02T21:00:00.000Z",
+      "duration": 82,
+      "authors": [
+        {
+          "fullName": "John Doe"
+        },
+        {
+          "fullName": "Don Romer"
+        }
+      ],
       "topRated": false
     },
     {
       "id": 4,
       "title": "Sit voluptate eiusmod ea",
-      "creationData": "Sat Jun 10 2023 00:00:00 GMT+0300",
-      "duration": 35,
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est fugit laudantium nobis quisquam recusandae?",
+      "creationData": "2023-06-09T21:00:00.000Z",
+      "duration": 35,
+      "authors": [
+        {
+          "fullName": "David Morrison"
+        }
+      ],
       "topRated": true
     },
     {
@@ -35,17 +48,27 @@
     {
       "id": 6,
       "title": "Lorem ipsum dolor sit.",
-      "creationData": "Mon Jul 01 2023 00:00:00 GMT+0300",
-      "duration": 82,
       "description": "Est consequat deserunt officia fugiat culpa in aliquip consectetur. Est nostrud occaecat cillum elit officia officia ea magna et minim officia commodo sunt. Deserunt duis minim magna nostrud enim enim commodo sit elit nostrud cillum aliquip est qui.",
+      "creationData": "2023-06-30T21:00:00.000Z",
+      "duration": 82,
+      "authors": [
+        {
+          "fullName": "David Morrison"
+        }
+      ],
       "topRated": false
     },
     {
       "id": 7,
       "title": "Lorem ipsum dolor sit.",
-      "creationData": "Sat Jun 15 2023 00:00:00 GMT+0300",
-      "duration": 35,
       "description": "Commodo id sunt sunt adipisicing et aliquip voluptate laborum consectetur. Occaecat nisi sint exercitation ullamco adipisicing irure est in consectetur aute voluptate. Ea pariatur dolor anim ea reprehenderit ut non occaecat magna adipisicing exercitation nisi consequat.",
+      "creationData": "2023-06-14T21:00:00.000Z",
+      "duration": 35,
+      "authors": [
+        {
+          "fullName": "Don Romer"
+        }
+      ],
       "topRated": true
     },
     {
@@ -189,6 +212,35 @@
       "password": "qwer",
       "token": "38dd5333LEK21",
       "fullName": "Фродо Бэггинс"
+    }
+  ],
+  "authors": [
+    {
+      "fullName": "John Doe"
+    },
+    {
+      "fullName": "David Morrison"
+    },
+    {
+      "fullName": "Kevin Morrison"
+    },
+    {
+      "fullName": "Don Romer"
+    },
+    {
+      "fullName": "Derek Powell"
+    },
+    {
+      "fullName": "David Russell"
+    },
+    {
+      "fullName": "Miriam Snyder"
+    },
+    {
+      "fullName": "William Hopkins"
+    },
+    {
+      "fullName": "Kate Hopkins"
     }
   ]
 }

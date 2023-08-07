@@ -1,11 +1,14 @@
-<div class="flex relative">
+<div class="p-float-label">
   <p-inputNumber
-    [(ngModel)]="value"
-    [showButtons]="true"
-    (ngModelChange)="onChange($event)"
+    id="duration"
     inputId="stacked"
     class="w-full"
     styleClass="w-full"
+    placeholder="Продожительность*"
+    (ngModelChange)="changeQuantity($event)"
+    [(ngModel)]="quantity"
+    [showButtons]="true"
   ></p-inputNumber>
-  <div class="absolute left-100 flex col-3">{{ value | duration }}</div>
+  <div class="absolute left-100 top-0 flex col-3">{{ quantity | duration }}</div>
+  <label for="duration">Продожительность*</label>
 </div>

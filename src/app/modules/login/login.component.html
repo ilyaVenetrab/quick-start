@@ -1,36 +1,48 @@
 <div class="flex align-items-center justify-content-center h-full">
   <div class="border-round bg-gray-100 p-4 w-25rem">
     <h2 class="mb-4">Вход</h2>
-    <div
+    <form
       class="flex flex-column gap-4"
+      #myForm="ngForm"
+      (ngSubmit)="onLogin(myForm)"
     >
       <div class="flex flex-column gap-2">
         <label for="email">Email</label>
         <input
           pInputText
           id="email"
-          [(ngModel)]="email"
+          name="email"
+          ngModel
+          #email="ngModel"
           placeholder="Например user@domain.com"
+          type="email"
+          required
+          email
         />
+        <div class="mx-1 text-red-500" *ngIf="email.invalid && email.touched">Поле должно содержать email</div>
       </div>
       <div class="flex flex-column gap-2">
         <label for="email">Пароль</label>
         <input
           pInputText
           id="password"
-          [(ngModel)]="password"
+          name="password"
+          ngModel
+          #password="ngModel"
           placeholder="Ваш пароль"
           type="password"
+          required
         />
+        <div class="mx-1 text-red-500" *ngIf="password.invalid && password.touched">Обязательное поле для заполение</div>
       </div>
-      <div class="mx-1 text-red-500" *ngIf="error">Некорректные данные</div>
       <div class="flex justify-content-between align-items-center">
         <span>Забыли пароль?</span>
         <p-button
+          [disabled]="myForm.invalid || false"
           label="Войти"
-          (onClick)="onLogin()"
+          type="submit"
         ></p-button>
       </div>
-    </div>
+    </form>
   </div>
 </div>

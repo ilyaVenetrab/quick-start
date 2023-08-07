@@ -1,1 +1,16 @@
-<p>authors works!</p>
+<div class="p-float-label flex">
+  <p-autoComplete
+    id="authors"
+    field="fullName"
+    class="flex-grow-1"
+    styleClass="w-full"
+    [(ngModel)]="selectedAuthors"
+    [suggestions]="(authors$ | async) || []"
+    (completeMethod)="filterAuthors($event)"
+    [completeOnFocus]="true"
+    (onSelect)="onSelect($event)"
+    (onUnselect)="onUnselect($event)"
+    [multiple]="true"
+  ></p-autoComplete>
+  <label for="authors">Авторы*</label>
+</div>

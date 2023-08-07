@@ -6,7 +6,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { SearchComponent } from './components/search/search.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { BorderSetDirective } from './directives/border-set.directive';
 import { DurationPipe } from './pipes/duration.pipe';
@@ -22,6 +22,7 @@ import { DurationCourseComponent } from './components/new-course/duration-course
 import { AuthorsComponent } from './components/new-course/authors/authors.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UpdateCourseResolver } from './components/new-course/update-course.resolver';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,8 @@ import { UpdateCourseResolver } from './components/new-course/update-course.reso
     InputTextareaModule,
     CalendarModule,
     InputNumberModule,
+    ReactiveFormsModule,
+    AutoCompleteModule,
   ],
   providers: [CoursesService, UpdateCourseResolver],
 })
