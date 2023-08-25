@@ -16,22 +16,13 @@ export const initialState: IState = {
 
 export const reducer = createReducer(
   initialState,
-  on(fromAuthAction.getAuth, (state: IState) => {
+  on(fromAuthAction.getAuth, fromAuthAction.logOut, (state: IState) => {
     return { ...state, userInfo: null, isLoading: true };
   }),
-  on(fromAuthAction.getAuthSuccess, (state: IState, { data }) => {
+  on(fromAuthAction.getAuthSuccess, fromAuthAction.logOutSuccess, (state: IState, { data }) => {
     return { ...state, userInfo: data, isLoading: false };
   }),
-  on(fromAuthAction.getAuthFailure, (state: IState) => {
-    return { ...state, userInfo: null, isLoading: false };
-  }),
-  on(fromAuthAction.logOut, (state: IState) => {
-    return { ...state, userInfo: null, isLoading: true };
-  }),
-  on(fromAuthAction.logOutSuccess, (state: IState, { data }) => {
-    return { ...state, userInfo: data, isLoading: false };
-  }),
-  on(fromAuthAction.logOutFailure, (state: IState) => {
+  on(fromAuthAction.getAuthFailure, fromAuthAction.logOutFailure, (state: IState) => {
     return { ...state, userInfo: null, isLoading: false };
   }),
 );

@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { filter, map, take, takeUntil } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs';
 import { ICourse } from '../../../../models/course';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { CoursesService } from '../../../../services/courses.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { IAuthor } from '../../../../models/authors';
 import { HttpClientModule } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { ICourseState } from '../../../../store/courses/reducers/courses.reducer';
+import { saveCourse, updateCourse } from '../../../../store/courses/actions/courses.actions';
+import { Actions, ofType } from '@ngrx/effects';
+import * as fromCoursesAction from '../../../../store/courses/actions/courses.actions';
 
 interface ICourseForm {
   id: FormControl<number | null>;
@@ -52,6 +57,8 @@ export class NewCourseComponent implements OnInit, OnDestroy {
     private coursesService: CoursesService,
     private router: Router,
     private fb: FormBuilder,
+    private readonly store: Store<ICourseState>,
+    private actions$: Actions,
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +74,13 @@ export class NewCourseComponent implements OnInit, OnDestroy {
           creationData: new Date(course.creationData),
         });
       });
+
+    this.actions$
+      .pipe(
+        ofType(fromCoursesAction.updateCourseSuccess, fromCoursesAction.saveCourseSuccess),
+        takeUntil(this.destroy$),
+      )
+      .subscribe({ next: () => this.router.navigateByUrl('/courses') });
   }
 
   onCancel(): void {
@@ -74,22 +88,11 @@ export class NewCourseComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
-    console.log('this.form.value ==> ', this.form.value);
     if (this.form.valid) {
       if (this.form.value.id) {
-        this.coursesService
-          .updateItem(this.form.value as any)
-          .pipe(take(1))
-          .subscribe(() => {
-            this.router.navigateByUrl('/courses');
-          });
+        this.store.dispatch(updateCourse({ course: this.form.value as ICourse }));
       } else {
-        this.coursesService
-          .saveItem(this.form.value as any)
-          .pipe(take(1))
-          .subscribe(() => {
-            this.router.navigateByUrl('/courses');
-          });
+        this.store.dispatch(saveCourse({ course: this.form.value as ICourse }));
       }
     }
   }

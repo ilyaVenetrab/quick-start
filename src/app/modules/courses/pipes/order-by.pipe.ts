@@ -6,7 +6,10 @@ import { ICourse } from '../../../models/course';
 })
 export class OrderByPipe implements PipeTransform {
   transform(courses: ICourse[], order: keyof ICourse): ICourse[] {
-    return courses.sort((a, b) => {
+    const sortData = [];
+    sortData.push(...courses);
+
+    return sortData.sort((a, b) => {
       if (a[order] < b[order]) {
         return 1;
       }

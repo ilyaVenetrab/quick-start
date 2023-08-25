@@ -23,6 +23,7 @@ import { AuthEffects } from './store/auth/effects/auth.effects';
 import { getAuth } from './store/auth/actions/auth.actions';
 import { Subject, takeUntil } from 'rxjs';
 import { selectLoading } from './store/auth/selectors/auth.selectors';
+import { CoursesEffects } from './store/courses/effects/courses.effects';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -55,7 +56,7 @@ export function initApp(store: Store): () => Promise<void> {
     ToastModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, CoursesEffects]),
   ],
   providers: [
     MessageService,

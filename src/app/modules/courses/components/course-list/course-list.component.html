@@ -7,7 +7,7 @@
     (click)="createNew()"
   ></p-button>
 </div>
-<div class="flex flex-column gap-5 mb-5">
+<div class="flex flex-column gap-5 mb-5" *ngIf="courses$ | async as courses">
   <ng-container
     *ngIf="courses.length; else empty"
   >
@@ -15,10 +15,10 @@
       *ngFor="let course of courses | orderBy: 'creationData'"
       [course]="course"
       (edit)="editCourse($event)"
-      (delete)="deleteCourse(course.id)"
+      (delete)="delete(course.id)"
       [appBorderSet]="course.creationData"
     ></app-course-item>
-    <div class="flex justify-content-center" *ngIf="loadMoreDisabled">
+    <div class="flex justify-content-center">
       <p-button
         class="col-5"
         label="Загрузить еще"
