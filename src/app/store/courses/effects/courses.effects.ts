@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, OnDestroy } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromCoursesAction from '../../courses/actions/courses.actions';
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap, takeUntil, withLatestFrom } from 'rxjs';
 import { CoursesService } from '../../../services/courses.service';
 import { Store } from '@ngrx/store';
 import { ICourseState } from '../reducers/courses.reducer';
 import { selectCoursesCount } from '../selectors/courses.selectors';
+import { Router } from '@angular/router';
 
 @Injectable()
-export class CoursesEffects {
+export class CoursesEffects implements OnDestroy {
+  private readonly destroy$ = new EventEmitter<void>();
+
   constructor(
     private actions$: Actions,
     private coursesService: CoursesService,
     private store: Store<ICourseState>,
+    private router: Router,
   ) {}
 
   getCourses$ = createEffect(() =>
@@ -65,4 +69,16 @@ export class CoursesEffects {
       ),
     ),
   );
+
+  updateCourseSuccess$ = this.actions$
+    .pipe(ofType(fromCoursesAction.updateCourseSuccess), takeUntil(this.destroy$))
+    .subscribe(() => this.router.navigateByUrl('/courses'));
+
+  saveCourseSuccess$ = this.actions$
+    .pipe(ofType(fromCoursesAction.saveCourseSuccess), takeUntil(this.destroy$))
+    .subscribe(() => this.router.navigateByUrl('/courses'));
+
+  ngOnDestroy(): void {
+    this.destroy$.emit();
+  }
 }

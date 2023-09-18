@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { IUser, IUserInfo } from '../../models/user';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IState } from '../../store';
-import { getAuthSuccess, logOut } from '../../store/auth/actions/auth.actions';
+import { getAuthSuccess } from '../../store/auth/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -36,10 +36,8 @@ export class AuthService {
       );
   }
 
-  logout(): void {
-    localStorage.removeItem(AuthService.STORAGE_KEY);
-    this.router.navigate(['/login']);
-    this.store.dispatch(logOut());
+  logout(): Observable<null> {
+    return of(null);
   }
 
   isAuthenticated(): boolean {

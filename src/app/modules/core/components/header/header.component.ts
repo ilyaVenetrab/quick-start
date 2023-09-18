@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../services/auth/auth.service';
 import { Observable } from 'rxjs';
 import { IUserInfo } from '../../../../models/user';
 import { selectAuth } from '../../../../store/auth/selectors/auth.selectors';
 import { IState } from '../../../../store';
 import { Store } from '@ngrx/store';
+import { logOut } from '../../../../store/auth/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +14,9 @@ import { Store } from '@ngrx/store';
 export class HeaderComponent {
   user$: Observable<IUserInfo | null> = this.store.select(selectAuth);
 
-  constructor(private authService: AuthService, private readonly store: Store<IState>) {}
+  constructor(private readonly store: Store<IState>) {}
 
   logout(): void {
-    this.authService.logout();
+    this.store.dispatch(logOut());
   }
 }
