@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,8 +14,35 @@ import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { LoaderInterceptor } from './services/loader/loader.interceptor';
 import { ToastModule } from 'primeng/toast';
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
+import { metaReducers, reducers } from './store';
+import { Store, StoreModule } from '@ngrx/store';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth/effects/auth.effects';
+import { getAuth } from './store/auth/actions/auth.actions';
+import { Subject, takeUntil } from 'rxjs';
+import { selectLoading } from './store/auth/selectors/auth.selectors';
+import { CoursesEffects } from './store/courses/effects/courses.effects';
 
 registerLocaleData(localeRu, 'ru');
+
+export function initApp(store: Store): () => Promise<void> {
+  return () =>
+    new Promise<void>((resolve) => {
+      const loaded$ = new Subject<void>();
+      store.dispatch(getAuth());
+      store
+        .select(selectLoading)
+        .pipe(takeUntil(loaded$))
+        .subscribe((loaded) => {
+          if (!loaded) {
+            loaded$.next();
+            resolve();
+          }
+        });
+    });
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +54,9 @@ registerLocaleData(localeRu, 'ru');
     ConfirmDialogModule,
     HttpClientModule,
     ToastModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    EffectsModule.forRoot([AuthEffects, CoursesEffects]),
   ],
   providers: [
     MessageService,
@@ -45,6 +75,12 @@ registerLocaleData(localeRu, 'ru');
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [Store],
       multi: true,
     },
   ],

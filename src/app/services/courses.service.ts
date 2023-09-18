@@ -3,7 +3,9 @@ import { ICourse } from '../models/course';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CoursesService {
   constructor(private readonly httpClient: HttpClient) {}
 
@@ -23,7 +25,7 @@ export class CoursesService {
     return this.httpClient.put<ICourse>(`/allCourses/${entity.id}`, entity);
   }
 
-  removeItem(id: number): Observable<ICourse[]> {
-    return this.httpClient.delete<ICourse[]>(`/allCourses/${id}`);
+  removeItem(id: number): Observable<any> {
+    return this.httpClient.delete(`/allCourses/${id}`);
   }
 }

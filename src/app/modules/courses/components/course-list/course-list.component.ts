@@ -3,8 +3,12 @@ import { ICourse } from '../../../../models/course';
 import { CoursesService } from '../../../../services/courses.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { debounceTime, Subject, take, takeUntil } from 'rxjs';
+import { debounceTime, Observable, Subject, takeUntil } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { ICourseState } from '../../../../store/courses/reducers/courses.reducer';
+import { Store } from '@ngrx/store';
+import { deleteCourse, getCourses } from '../../../../store/courses/actions/courses.actions';
+import { selectCourses } from '../../../../store/courses/selectors/courses.selectors';
 
 @Component({
   selector: 'app-course-list',
@@ -14,9 +18,7 @@ import { filter } from 'rxjs/operators';
 export class CourseListComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new EventEmitter<void>();
 
-  courses: ICourse[] = [];
-
-  loadMoreDisabled = false;
+  courses$: Observable<ICourse[]> = this.store.select(selectCourses);
 
   filterSearch: Subject<string> = new Subject<string>();
 
@@ -24,6 +26,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
     private coursesService: CoursesService,
     private confirmationService: ConfirmationService,
     private router: Router,
+    private readonly store: Store<ICourseState>,
   ) {
     this.filterSearch
       .pipe(
@@ -32,7 +35,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe((search) => {
-        this.loadData(10, search);
+        this.store.dispatch(getCourses({ limit: 10, search }));
       });
   }
 
@@ -40,7 +43,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/courses/' + entity.id);
   }
 
-  deleteCourse(id: number): void {
+  delete(id: number): void {
     this.confirmationService.confirm({
       header: 'Удалить курс?',
       message: 'Вы действительно хотите удалить этот курс?',
@@ -48,9 +51,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
       acceptIcon: 'pi',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
-        this.coursesService.removeItem(id).subscribe(() => {
-          this.loadData();
-        });
+        this.store.dispatch(deleteCourse({ id }));
       },
       rejectLabel: 'Отмена',
       rejectIcon: 'pi',
@@ -60,22 +61,11 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(count = 10, search = ''): void {
-    this.coursesService
-      .getList(count, search)
-      .pipe(take(1))
-      .subscribe((course) => {
-        this.courses = course;
-
-        this.loadMoreDisabled = this.courses.length >= count;
-      });
+    this.store.dispatch(getCourses({}));
   }
 
   loadMore(): void {
-    this.loadData(this.courses.length + 10);
+    this.store.dispatch(getCourses({}));
   }
 
   onSearch(str: string): void {
