@@ -1,7 +1,7 @@
-import { EventEmitter, Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as fromCoursesAction from '../../courses/actions/courses.actions';
-import { catchError, map, of, switchMap, takeUntil, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { CoursesService } from '../../../services/courses.service';
 import { Store } from '@ngrx/store';
 import { ICourseState } from '../reducers/courses.reducer';
@@ -9,9 +9,7 @@ import { selectCoursesCount } from '../selectors/courses.selectors';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class CoursesEffects implements OnDestroy {
-  private readonly destroy$ = new EventEmitter<void>();
-
+export class CoursesEffects {
   constructor(
     private actions$: Actions,
     private coursesService: CoursesService,
@@ -70,15 +68,25 @@ export class CoursesEffects implements OnDestroy {
     ),
   );
 
-  updateCourseSuccess$ = this.actions$
-    .pipe(ofType(fromCoursesAction.updateCourseSuccess), takeUntil(this.destroy$))
-    .subscribe(() => this.router.navigateByUrl('/courses'));
+  updateCourseSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromCoursesAction.updateCourseSuccess),
+        tap(() => {
+          this.router.navigateByUrl('/courses');
+        }),
+      ),
+    { dispatch: false },
+  );
 
-  saveCourseSuccess$ = this.actions$
-    .pipe(ofType(fromCoursesAction.saveCourseSuccess), takeUntil(this.destroy$))
-    .subscribe(() => this.router.navigateByUrl('/courses'));
-
-  ngOnDestroy(): void {
-    this.destroy$.emit();
-  }
+  saveCourseSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromCoursesAction.saveCourseSuccess),
+        tap(() => {
+          this.router.navigateByUrl('/courses');
+        }),
+      ),
+    { dispatch: false },
+  );
 }
