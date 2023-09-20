@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -9,6 +11,7 @@ describe('NotFoundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NotFoundComponent],
+      imports: [CardModule, ButtonModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);

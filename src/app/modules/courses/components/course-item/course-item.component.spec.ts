@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseItemComponent } from './course-item.component';
+import { DurationPipe } from '../../pipes/duration.pipe';
+import { ButtonModule } from 'primeng/button';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -8,7 +10,8 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CourseItemComponent],
+      declarations: [CourseItemComponent, DurationPipe],
+      imports: [ButtonModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseItemComponent);

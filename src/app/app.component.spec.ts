@@ -1,12 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CoreModule } from './modules/core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, reducers } from './store';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        CoreModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        ConfirmDialogModule,
+        ToastModule,
+      ],
       declarations: [AppComponent],
+      providers: [ConfirmationService, MessageService],
     }).compileComponents();
   });
 
@@ -20,14 +33,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('quick-start');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'quick-start app is running!',
-    );
   });
 });
