@@ -1,19 +1,30 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { autoSpy, SpyOf } from '../../../../utils/auto-spy';
+import { BreadcrumbService } from '../../../../services/breadcrumb.service';
+
+function setup<T>(): {
+  default: () => any;
+  build: () => T;
+  [key: string]: any;
+} {
+  const breadcrumbService: SpyOf<BreadcrumbService> = autoSpy(BreadcrumbService);
+  const builder = {
+    default(): any {
+      return builder;
+    },
+    build(): any {
+      return new BreadcrumbsComponent(breadcrumbService);
+    },
+  };
+  return builder;
+}
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
-  let fixture: ComponentFixture<BreadcrumbsComponent>;
+  const { build } = setup<BreadcrumbsComponent>();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [BreadcrumbsComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(BreadcrumbsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    component = build();
   });
 
   it('should create', () => {

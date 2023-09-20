@@ -57,11 +57,13 @@
 
     <div class="flex gap-3">
       <p-button
+        [class]="'button-cancel'"
         label="Отмена"
-        styleClass="p-button- p-button-text"
+        styleClass="p-button p-button-text"
         (click)="onCancel()"
       ></p-button>
       <p-button
+        [class]="'button-save'"
         label="Сохранить"
         styleClass="p-button"
         [disabled]="form.invalid"

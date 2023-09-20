@@ -1,11 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-
 import { HttpErrorInterceptor } from './http-error.interceptor';
+import { autoSpy, SpyOf } from '../utils/auto-spy';
+import { MessageService } from 'primeng/api';
 
 describe('HttpErrorInterceptor', () => {
+  const messageService: SpyOf<MessageService> = autoSpy(MessageService);
+
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [HttpErrorInterceptor],
+      providers: [HttpErrorInterceptor, { provide: MessageService, useValue: messageService }],
     }),
   );
 

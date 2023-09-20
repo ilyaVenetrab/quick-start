@@ -63,7 +63,7 @@
       "title": "Lorem ipsum dolor sit.",
       "description": "Commodo id sunt sunt adipisicing et aliquip voluptate laborum consectetur. Occaecat nisi sint exercitation ullamco adipisicing irure est in consectetur aute voluptate. Ea pariatur dolor anim ea reprehenderit ut non occaecat magna adipisicing exercitation nisi consequat.",
       "creationData": "2023-06-14T21:00:00.000Z",
-      "duration": 35,
+      "duration": 120,
       "authors": [
         {
           "fullName": "Don Romer"
@@ -197,6 +197,19 @@
       "creationData": "2023-06-11T21:00:00.000Z",
       "duration": 45,
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi distinctio dolorum est explicabo libero nemo perspiciatis voluptas.",
+      "topRated": false
+    },
+    {
+      "id": 122,
+      "title": "123",
+      "description": "123",
+      "creationData": "2023-09-11T21:00:00.000Z",
+      "duration": 2,
+      "authors": [
+        {
+          "fullName": "Kevin Morrison"
+        }
+      ],
       "topRated": false
     }
   ],

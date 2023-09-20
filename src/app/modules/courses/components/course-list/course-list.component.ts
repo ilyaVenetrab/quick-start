@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { ICourse } from '../../../../models/course';
-import { CoursesService } from '../../../../services/courses.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { debounceTime, Observable, Subject, takeUntil } from 'rxjs';
@@ -23,10 +22,9 @@ export class CourseListComponent implements OnInit, OnDestroy {
   filterSearch: Subject<string> = new Subject<string>();
 
   constructor(
-    private coursesService: CoursesService,
     private confirmationService: ConfirmationService,
-    private router: Router,
     private readonly store: Store<ICourseState>,
+    private router: Router,
   ) {
     this.filterSearch
       .pipe(

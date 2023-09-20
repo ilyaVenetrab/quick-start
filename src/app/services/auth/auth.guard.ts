@@ -7,7 +7,6 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import { AuthService } from './auth.service';
 import { Store } from '@ngrx/store';
 import { IState } from '../../store/auth/reducers/auth.reducer';
 import { selectAuth } from '../../store/auth/selectors/auth.selectors';
@@ -16,11 +15,7 @@ import { selectAuth } from '../../store/auth/selectors/auth.selectors';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private readonly store: Store<IState>,
-  ) {}
+  constructor(private router: Router, private readonly store: Store<IState>) {}
 
   canActivate(
     _route: ActivatedRouteSnapshot,
